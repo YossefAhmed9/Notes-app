@@ -22,11 +22,11 @@ class HomePage extends StatelessWidget {
             actions: [
               IconButton(
                   onPressed: () {
-                    navigateTo(context, NotesList());
+                    navigateTo(context, const NotesList());
                   },
-                  icon: Icon(CupertinoIcons.collections))
+                  icon: const Icon(CupertinoIcons.collections))
             ],
-            title: Text(
+            title: const Text(
               'Notes app',
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
             ),
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                         'Enter the title of the note',
                         OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        Icon(CupertinoIcons.pen),
+                        const Icon(CupertinoIcons.pen),
                         (value) => null),
                   ),
                   TextFormField(

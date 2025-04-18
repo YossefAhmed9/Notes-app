@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app_training/core/database_cubit/cubit.dart';
@@ -21,29 +22,31 @@ class _NotesListState extends State<NotesList> {
       listener: (context, state) {},
       builder: (context, state) {
         NotesCubit cubit = NotesCubit.get(context);
+        Random random=Random();
+
+        List colors=[
+          Colors.amberAccent,
+          Colors.pinkAccent,
+          Colors.blueAccent,
+          Colors.lightGreenAccent,
+          Colors.cyanAccent,
+          Colors.indigoAccent,
+          Colors.teal,
+          Colors.brown[300],
+          Colors.lightBlue,
+        ];
         return Scaffold(
           appBar: AppBar(
             title: const Text('Your notes'),
           ),
-          body: ListView.separated(
+          body: DBCubit.get(context).result.isEmpty ?  const Center(child: Text('No Notes',style: TextStyle(fontSize: 25,fontWeight: FontWeight.w700),),) : ListView.separated(
               itemBuilder: (context, index) {
                 TextEditingController updateTitle = TextEditingController(
                     text: DBModel.fromJson(DBCubit.get(context).result, index).title);
 
                 TextEditingController updateNote = TextEditingController(
                     text: DBModel.fromJson(DBCubit.get(context).result, index).note);
-                Random random=Random();
-                List colors=[
-                  Colors.amberAccent,
-                  Colors.pinkAccent,
-                  Colors.blueAccent,
-                  Colors.lightGreenAccent,
-                  Colors.cyanAccent,
-                  Colors.indigoAccent,
-                  Colors.teal,
-                  Colors.brown[300],
-                  Colors.lightBlue,
-                ];
+
                 return Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
@@ -100,7 +103,9 @@ class _NotesListState extends State<NotesList> {
                                                         note: updateNote.text,
                                                         id: index+1,
                                                         context: context);
-                                                    print('DONE');
+                                                    if (kDebugMode) {
+                                                      print('DONE');
+                                                    }
                                                   });
                                                 },
                                                 child: const Text('Save'),
