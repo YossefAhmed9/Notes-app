@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app_training/database_cubit/cubit.dart';
+import 'package:notes_app_training/core/database_cubit/cubit.dart';
 import 'package:notes_app_training/notes_cubit/notes_cubit.dart';
 import 'Home page.dart';
 
@@ -28,12 +28,11 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: HomePage(),
+        home: const HomePage(),
         debugShowCheckedModeBanner: false,
       ),
     );

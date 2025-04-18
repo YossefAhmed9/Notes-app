@@ -1,7 +1,8 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app_training/database_cubit/cubit.dart';
+import 'package:notes_app_training/core/database_cubit/cubit.dart';
 import 'package:notes_app_training/models/model.dart';
 import 'package:notes_app_training/notes_cubit/notes_cubit.dart';
 import 'package:notes_app_training/notes_cubit/notes_states.dart';
@@ -17,24 +18,34 @@ class NotesList extends StatelessWidget {
         NotesCubit cubit = NotesCubit.get(context);
         return Scaffold(
           appBar: AppBar(
-            title: Text('Your notes'),
+            title: const Text('Your notes'),
           ),
           body: ListView.separated(
               itemBuilder: (context, index) {
                 TextEditingController updateTitle = TextEditingController(
-                    text: DBModel.fromJson(DBCubit.get(context).result, index)
-                        .title);
-                TextEditingController updateNote = TextEditingController(
-                    text: DBModel.fromJson(DBCubit.get(context).result, index)
-                        .note);
+                    text: DBModel.fromJson(DBCubit.get(context).result, index).title);
 
+                TextEditingController updateNote = TextEditingController(
+                    text: DBModel.fromJson(DBCubit.get(context).result, index).note);
+                Random random=Random();
+                List colors=[
+                  Colors.amberAccent,
+                  Colors.pinkAccent,
+                  Colors.blueAccent,
+                  Colors.lightGreenAccent,
+                  Colors.cyanAccent,
+                  Colors.indigoAccent,
+                  Colors.teal,
+                  Colors.brown[300],
+                  Colors.lightBlue,
+                ];
                 return Container(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                   ),
                   child: Card(
-                    color: Colors.blueGrey,
+                    color: colors[random.nextInt(colors.length)],
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -47,36 +58,46 @@ class NotesList extends StatelessWidget {
                                     context: context,
                                     builder: (BuildContext context) {
                                       return Container(
-                                        padding: EdgeInsets.all(16.0),
+                                        decoration: BoxDecoration(
+                                          color: Colors.deepPurple[100]
+                                        ),
+                                        padding: const EdgeInsets.all(16.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Text('Update Note:'),
-                                            SizedBox(height: 16.0),
+                                            const Text('Update Note:',style: TextStyle(fontWeight: FontWeight.w700),),
+                                            const SizedBox(height: 16.0),
                                             TextFormField(
                                               controller: updateTitle,
-                                              decoration: InputDecoration(
-                                                  labelText: 'First Name',
+                                              decoration: const InputDecoration(
+                                                  labelText: 'Update title',
                                                   border: OutlineInputBorder()),
                                             ),
-                                            SizedBox(height: 16.0),
+                                            const SizedBox(height: 16.0),
                                             TextFormField(
+                                              maxLines: 20,
                                               controller: updateNote,
-                                              decoration: InputDecoration(
-                                                  labelText: 'Last Name',
+                                              decoration: const InputDecoration(
+                                                  labelText: 'Update note',
                                                   border: OutlineInputBorder()),
                                             ),
-                                            SizedBox(height: 16.0),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                cubit.updateData(
-                                                    title: updateTitle.text,
-                                                    note: updateNote.text,
-                                                    id: index+1,
-                                                    context: context);
-                                                print('DONE');
-                                              },
-                                              child: Text('Submit'),
+                                            const SizedBox(height: 16.0),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(20),
+                                                color: Colors.cyanAccent
+                                              ),
+                                              child: MaterialButton(
+                                                onPressed: () {
+                                                  cubit.updateData(
+                                                      title: updateTitle.text,
+                                                      note: updateNote.text,
+                                                      id: index+1,
+                                                      context: context);
+                                                  print('DONE');
+                                                },
+                                                child: const Text('Save'),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -87,13 +108,13 @@ class NotesList extends StatelessWidget {
                                 children: [
                                   Text(
                                     'title: ${DBModel.fromJson(DBCubit.get(context).result, index).title}',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
+                                    style: const TextStyle(
+                                        color: Colors.black87, fontSize: 20),
                                   ),
                                   Text(
-                                    '${DBModel.fromJson(DBCubit.get(context).result, index).note}',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
+                                    DBModel.fromJson(DBCubit.get(context).result, index).note,
+                                    style: const TextStyle(
+                                        color: Colors.black87, fontSize: 20),
                                   ),
                                 ],
                               ),
@@ -107,8 +128,8 @@ class NotesList extends StatelessWidget {
                                       id: DBModel.fromJson(DBCubit.get(context).result, index).id,
                                       context: context);
                                 },
-                                icon: Icon(CupertinoIcons.trash),
-                                color: Colors.red,
+                                icon: const Icon(CupertinoIcons.trash),
+                                color: Colors.white,
                               )
                             ],
                           )
@@ -120,7 +141,7 @@ class NotesList extends StatelessWidget {
               },
               separatorBuilder: (context, index) {
                 return Container(
-                  decoration: BoxDecoration(color: Colors.black12),
+                  decoration: const BoxDecoration(color: Colors.black12),
                   width: double.infinity,
                   height: 2,
                 );

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app_training/database_cubit/states.dart';
+import 'package:notes_app_training/core/database_cubit/states.dart';
 import 'package:sqflite/sqflite.dart';
 
 

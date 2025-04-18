@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app_training/components.dart';
-import 'package:notes_app_training/database_cubit/cubit.dart';
-import 'package:notes_app_training/database_cubit/states.dart';
+import 'package:notes_app_training/core/database_cubit/cubit.dart';
 import 'Notes_list.dart';
+import 'core/database_cubit/states.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
                   Padding(

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:notes_app_training/database_cubit/cubit.dart';
+import 'package:notes_app_training/core/database_cubit/cubit.dart';
 
 import 'notes_states.dart';
 
