@@ -19,8 +19,7 @@ class DBCubit extends Cubit<DBStates> {
       version: 1,
       onCreate: (database, version) async {
         print('database created');
-       await database
-            .execute(
+       await database.execute(
             'CREATE TABLE notes (id INTEGER PRIMARY KEY, title TEXT, note TEXT)')
             .then((value) {
           print('table created');
@@ -78,8 +77,7 @@ class DBCubit extends Cubit<DBStates> {
   }) async {
     emit(InsertDBLoadingState());
     await database?.transaction((txn) async {
-      txn
-          .rawInsert(
+      txn.rawInsert(
         'INSERT INTO notes(title, note) VALUES("$title", "$note")',
       )
           .then((value) {

@@ -7,9 +7,14 @@ import 'package:notes_app_training/models/model.dart';
 import 'package:notes_app_training/notes_cubit/notes_cubit.dart';
 import 'package:notes_app_training/notes_cubit/notes_states.dart';
 
-class NotesList extends StatelessWidget {
+class NotesList extends StatefulWidget {
   const NotesList({super.key});
 
+  @override
+  State<NotesList> createState() => _NotesListState();
+}
+
+class _NotesListState extends State<NotesList> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NotesCubit, NotesScreenStates>(
@@ -89,12 +94,14 @@ class NotesList extends StatelessWidget {
                                               ),
                                               child: MaterialButton(
                                                 onPressed: () {
-                                                  cubit.updateData(
-                                                      title: updateTitle.text,
-                                                      note: updateNote.text,
-                                                      id: index+1,
-                                                      context: context);
-                                                  print('DONE');
+                                                  setState(() {
+                                                    cubit.updateData(
+                                                        title: updateTitle.text,
+                                                        note: updateNote.text,
+                                                        id: index+1,
+                                                        context: context);
+                                                    print('DONE');
+                                                  });
                                                 },
                                                 child: const Text('Save'),
                                               ),

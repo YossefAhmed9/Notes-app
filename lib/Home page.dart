@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
                                 title: titleController.text,
                                 note: noteController.text);
                           },
-                          child: Text(
+                          child: const Text(
                             'Save note',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600,
